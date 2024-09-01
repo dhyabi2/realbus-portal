@@ -101,18 +101,18 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">لوحة تحكم المسؤول</h1>
-      <Tabs defaultValue="real-estate">
-        <TabsList>
+    <div className="p-4 rtl">
+      <h1 className="text-2xl font-bold mb-4 text-right">لوحة تحكم المسؤول</h1>
+      <Tabs defaultValue="real-estate" dir="rtl">
+        <TabsList className="mb-4">
           <TabsTrigger value="real-estate">السكنات</TabsTrigger>
           <TabsTrigger value="buses">الباصات</TabsTrigger>
         </TabsList>
         <TabsContent value="real-estate">
-          <h2 className="text-xl font-semibold mb-2">إضافة قائمة سكنات</h2>
+          <h2 className="text-xl font-semibold mb-2 text-right">إضافة قائمة سكنات</h2>
           <form onSubmit={handleAddRealEstate} className="space-y-4">
-            <div>
-              <Label htmlFor="name">الاسم</Label>
+            <div className="text-right">
+              <Label htmlFor="name" className="block mb-1">الاسم</Label>
               <Input
                 id="name"
                 name="name"
@@ -120,12 +120,13 @@ const AdminDashboard = () => {
                 onChange={handleRealEstateInputChange}
                 placeholder="اسم السكن"
                 required
+                className="w-full"
               />
             </div>
-            <div>
-              <Label htmlFor="location">الموقع</Label>
+            <div className="text-right">
+              <Label htmlFor="location" className="block mb-1">الموقع</Label>
               <Select onValueChange={handleLocationChange} value={realEstateForm.location} required>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="اختر الموقع" />
                 </SelectTrigger>
                 <SelectContent>
@@ -135,8 +136,8 @@ const AdminDashboard = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div>
-              <Label>أنواع الغرف</Label>
+            <div className="text-right">
+              <Label className="block mb-1">أنواع الغرف</Label>
               {realEstateForm.roomTypes.map((room, index) => (
                 <div key={index} className="flex space-x-2 mb-2 rtl:space-x-reverse">
                   <Select
@@ -144,7 +145,7 @@ const AdminDashboard = () => {
                     value={room.type}
                     required
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="نوع الغرفة" />
                     </SelectTrigger>
                     <SelectContent>
@@ -159,13 +160,14 @@ const AdminDashboard = () => {
                     value={room.price}
                     onChange={(e) => handleRoomTypeChange(index, 'price', e.target.value)}
                     required
+                    className="w-1/3"
                   />
                 </div>
               ))}
-              <Button type="button" onClick={addRoomType}>إضافة نوع غرفة</Button>
+              <Button type="button" onClick={addRoomType} className="mt-2">إضافة نوع غرفة</Button>
             </div>
-            <div>
-              <Label>المميزات</Label>
+            <div className="text-right">
+              <Label className="block mb-1">المميزات</Label>
               <div className="flex flex-wrap gap-4">
                 {featureOptions.map(feature => (
                   <div key={feature} className="flex items-center space-x-2 rtl:space-x-reverse">
@@ -179,42 +181,45 @@ const AdminDashboard = () => {
                 ))}
               </div>
             </div>
-            <div>
-              <Label htmlFor="image">الصورة (PNG فقط)</Label>
+            <div className="text-right">
+              <Label htmlFor="image" className="block mb-1">الصورة (PNG فقط)</Label>
               <Input
                 id="image"
                 type="file"
                 accept="image/png"
                 onChange={handleImageUpload}
                 required
+                className="w-full"
               />
             </div>
-            <div className="flex space-x-2 rtl:space-x-reverse">
+            <div className="flex space-x-2 rtl:space-x-reverse justify-end">
               <Button type="submit">إضافة سكن</Button>
               <Button type="button" onClick={resetRealEstateForm} variant="outline">إعادة تعيين النموذج</Button>
             </div>
           </form>
         </TabsContent>
         <TabsContent value="buses">
-          <h2 className="text-xl font-semibold mb-2">إضافة قائمة باصات</h2>
+          <h2 className="text-xl font-semibold mb-2 text-right">إضافة قائمة باصات</h2>
           <form onSubmit={handleAddBus} className="space-y-4">
-            <div>
-              <Label htmlFor="busName">الاسم</Label>
-              <Input id="busName" placeholder="اسم الباص" />
+            <div className="text-right">
+              <Label htmlFor="busName" className="block mb-1">الاسم</Label>
+              <Input id="busName" placeholder="اسم الباص" className="w-full" />
             </div>
-            <div>
-              <Label htmlFor="from">من</Label>
-              <Input id="from" placeholder="موقع المغادرة" />
+            <div className="text-right">
+              <Label htmlFor="from" className="block mb-1">من</Label>
+              <Input id="from" placeholder="موقع المغادرة" className="w-full" />
             </div>
-            <div>
-              <Label htmlFor="to">إلى</Label>
-              <Input id="to" placeholder="موقع الوصول" />
+            <div className="text-right">
+              <Label htmlFor="to" className="block mb-1">إلى</Label>
+              <Input id="to" placeholder="موقع الوصول" className="w-full" />
             </div>
-            <div>
-              <Label htmlFor="busImage">الصورة</Label>
-              <Input id="busImage" type="file" accept="image/png" />
+            <div className="text-right">
+              <Label htmlFor="busImage" className="block mb-1">الصورة</Label>
+              <Input id="busImage" type="file" accept="image/png" className="w-full" />
             </div>
-            <Button type="submit">إضافة باص</Button>
+            <div className="flex justify-end">
+              <Button type="submit">إضافة باص</Button>
+            </div>
           </form>
         </TabsContent>
       </Tabs>
