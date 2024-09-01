@@ -12,8 +12,15 @@ const Layout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-background font-inter">
       <header className="bg-primary text-white p-4">
-        <div className="container mx-auto">
-          <Link to="/" className="text-2xl font-bold">RealBus Portal</Link>
+        <div className="container mx-auto flex items-center">
+          <Link to="/" className="flex items-center">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+              <rect width="40" height="40" rx="8" fill="#FFF5F5"/>
+              <path d="M20 10L30 30H10L20 10Z" fill="#FFA5A5"/>
+              <circle cx="20" cy="25" r="5" fill="#FF7A7A"/>
+            </svg>
+            <span className="text-2xl font-bold">RealBus Portal</span>
+          </Link>
         </div>
       </header>
       <main className="flex-grow container mx-auto p-4 pb-16">
