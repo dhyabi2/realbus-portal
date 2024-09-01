@@ -1,40 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Home, Building, Bus, User } from 'lucide-react';
 
 const Layout = ({ children }) => {
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path ? 'text-blue-500' : 'text-gray-500';
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold">Logo</Link>
-          <nav>
-            <ul className="flex space-x-4">
-              <li><Link to="/real-estate">Real Estate</Link></li>
-              <li><Link to="/buses">Buses</Link></li>
-              <li><Link to="/faq">FAQ</Link></li>
-            </ul>
-          </nav>
+        <div className="container mx-auto">
+          <Link to="/" className="text-2xl font-bold">RealBus Portal</Link>
         </div>
       </header>
-      <main className="flex-grow container mx-auto p-4">
+      <main className="flex-grow container mx-auto p-4 pb-16">
         {children}
       </main>
-      <footer className="bg-gray-200 p-4">
-        <div className="container mx-auto flex justify-between">
-          <div>
-            <h3 className="font-bold">Contact Information</h3>
-            <p>Email: info@example.com</p>
-            <p>Phone: +1234567890</p>
-          </div>
-          <div>
-            <h3 className="font-bold">Links</h3>
-            <ul>
-              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
-              <li><Link to="/terms-of-service">Terms of Service</Link></li>
-            </ul>
-          </div>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div className="flex justify-around items-center h-16">
+          <Link to="/" className={`flex flex-col items-center ${isActive('/')}`}>
+            <Home size={24} />
+            <span className="text-xs mt-1">Home</span>
+          </Link>
+          <Link to="/real-estate" className={`flex flex-col items-center ${isActive('/real-estate')}`}>
+            <Building size={24} />
+            <span className="text-xs mt-1">Real Estate</span>
+          </Link>
+          <Link to="/buses" className={`flex flex-col items-center ${isActive('/buses')}`}>
+            <Bus size={24} />
+            <span className="text-xs mt-1">Buses</span>
+          </Link>
+          <Link to="/admin" className={`flex flex-col items-center ${isActive('/admin')}`}>
+            <User size={24} />
+            <span className="text-xs mt-1">Admin</span>
+          </Link>
         </div>
-      </footer>
+      </nav>
     </div>
   );
 };

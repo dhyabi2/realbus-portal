@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Index from "./pages/Index";
+import RealEstate from "./pages/RealEstate";
+import Buses from "./pages/Buses";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +19,10 @@ const App = () => (
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/real-estate" element={<RealEstate />} />
+            <Route path="/buses" element={<Buses />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            {/* Add more routes as needed */}
           </Routes>
         </Layout>
       </BrowserRouter>
