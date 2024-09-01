@@ -10,7 +10,6 @@ const AdminDashboard = () => {
   const [realEstateListings, setRealEstateListings] = useState([]);
   const [busListings, setBusListings] = useState([]);
 
-  // New state for real estate form
   const [realEstateForm, setRealEstateForm] = useState({
     name: '',
     location: '',
@@ -69,8 +68,6 @@ const AdminDashboard = () => {
 
   const handleAddRealEstate = (e) => {
     e.preventDefault();
-    // TODO: Implement real estate listing addition
-    console.log('Add real estate listing', realEstateForm);
     setRealEstateListings(prev => [...prev, realEstateForm]);
     resetRealEstateForm();
   };
