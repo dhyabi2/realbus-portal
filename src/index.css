@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -72,5 +74,17 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
   }
+}
+
+.pastel-bg-1 { background-color: #FFD1DC; }
+.pastel-bg-2 { background-color: #E0F0FF; }
+.pastel-bg-3 { background-color: #FFDAB9; }
+.pastel-bg-4 { background-color: #D0F0C0; }
+
+.section-bar {
+  height: 8px;
+  width: 100%;
+  margin-bottom: 16px;
 }

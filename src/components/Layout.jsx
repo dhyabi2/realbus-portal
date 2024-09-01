@@ -10,13 +10,15 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-blue-600 text-white p-4">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <header className="bg-white shadow-sm p-4">
         <div className="container mx-auto">
-          <Link to="/" className="text-2xl font-bold">RealBus Portal</Link>
+          <h1 className="text-2xl font-semibold text-gray-800">RealBus Portal</h1>
         </div>
       </header>
-      <main className="flex-grow container mx-auto p-4 pb-16">
+      <main className="flex-grow container mx-auto p-4 pb-20">
+        <div className="section-bar pastel-bg-1"></div>
+        <h2 className="text-xl font-semibold mb-4">Hello, Katy!</h2>
         {children}
       </main>
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
