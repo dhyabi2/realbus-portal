@@ -81,7 +81,7 @@ const AdminDashboard = () => {
     setRealEstateListings(updatedListings);
     saveToLocalStorage('realEstateListings', updatedListings);
     resetRealEstateForm();
-    alert('تمت إضافة قائمة العقارات بنجاح!');
+    alert('تمت إضافة قائمة السكنات بنجاح!');
   };
 
   const resetRealEstateForm = () => {
@@ -105,11 +105,11 @@ const AdminDashboard = () => {
       <h1 className="text-2xl font-bold mb-4">لوحة تحكم المسؤول</h1>
       <Tabs defaultValue="real-estate">
         <TabsList>
-          <TabsTrigger value="real-estate">العقارات</TabsTrigger>
+          <TabsTrigger value="real-estate">السكنات</TabsTrigger>
           <TabsTrigger value="buses">الحافلات</TabsTrigger>
         </TabsList>
         <TabsContent value="real-estate">
-          <h2 className="text-xl font-semibold mb-2">إضافة قائمة عقارات</h2>
+          <h2 className="text-xl font-semibold mb-2">إضافة قائمة سكنات</h2>
           <form onSubmit={handleAddRealEstate} className="space-y-4">
             <div>
               <Label htmlFor="name">الاسم</Label>
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
                 name="name"
                 value={realEstateForm.name}
                 onChange={handleRealEstateInputChange}
-                placeholder="اسم العقار"
+                placeholder="اسم السكن"
                 required
               />
             </div>
@@ -190,7 +190,7 @@ const AdminDashboard = () => {
               />
             </div>
             <div className="flex space-x-2 rtl:space-x-reverse">
-              <Button type="submit">إضافة عقار</Button>
+              <Button type="submit">إضافة سكن</Button>
               <Button type="button" onClick={resetRealEstateForm} variant="outline">إعادة تعيين النموذج</Button>
             </div>
           </form>

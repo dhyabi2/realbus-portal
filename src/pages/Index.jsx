@@ -13,7 +13,7 @@ const Index = () => {
           <Link to="/real-estate">
             <Button className="w-full h-24 text-lg flex flex-col items-center justify-center bg-secondary hover:bg-secondary/90 text-secondary-foreground">
               <Building2 size={32} className="mb-2" />
-              العقارات
+              السكنات
             </Button>
           </Link>
           <Link to="/buses">
@@ -27,7 +27,7 @@ const Index = () => {
       <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-6">
         <h2 className="text-xl font-semibold mb-4 text-secondary">النشاط الأخير</h2>
         <ul className="space-y-2 rtl:text-right">
-          <li className="text-sm text-gray-600">تمت إضافة قائمة عقارات جديدة</li>
+          <li className="text-sm text-gray-600">تمت إضافة قائمة سكنات جديدة</li>
           <li className="text-sm text-gray-600">تم تحديث جدول الحافلات</li>
           <li className="text-sm text-gray-600">3 تسجيلات مستخدمين جديدة</li>
         </ul>

@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
           </Link>
           <Link to="/real-estate" className={`flex flex-col items-center ${isActive('/real-estate')}`}>
             <Building size={24} />
-            <span className="text-xs mt-1">العقارات</span>
+            <span className="text-xs mt-1">السكنات</span>
           </Link>
           <Link to="/buses" className={`flex flex-col items-center ${isActive('/buses')}`}>
             <Bus size={24} />
