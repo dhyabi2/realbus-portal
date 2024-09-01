@@ -20,10 +20,10 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    const storedRealEstateListings = getFromLocalStorage('realEstateListings');
-    const storedBusListings = getFromLocalStorage('busListings');
-    if (storedRealEstateListings) setRealEstateListings(storedRealEstateListings);
-    if (storedBusListings) setBusListings(storedBusListings);
+    const storedRealEstateListings = getFromLocalStorage('realEstateListings') || [];
+    const storedBusListings = getFromLocalStorage('busListings') || [];
+    setRealEstateListings(storedRealEstateListings);
+    setBusListings(storedBusListings);
   }, []);
 
   const locations = ["مسقط", "بوشر", "السيب", "مطرح", "العامرات", "قريات"];
@@ -76,10 +76,12 @@ const AdminDashboard = () => {
 
   const handleAddRealEstate = (e) => {
     e.preventDefault();
-    const newListings = [...realEstateListings, realEstateForm];
-    setRealEstateListings(newListings);
-    saveToLocalStorage('realEstateListings', newListings);
+    const newListing = { ...realEstateForm, id: Date.now() };
+    const updatedListings = [...realEstateListings, newListing];
+    setRealEstateListings(updatedListings);
+    saveToLocalStorage('realEstateListings', updatedListings);
     resetRealEstateForm();
+    alert('Real estate listing added successfully!');
   };
 
   const resetRealEstateForm = () => {
@@ -117,11 +119,12 @@ const AdminDashboard = () => {
                 value={realEstateForm.name}
                 onChange={handleRealEstateInputChange}
                 placeholder="Property Name"
+                required
               />
             </div>
             <div>
               <Label htmlFor="location">Location</Label>
-              <Select onValueChange={handleLocationChange} value={realEstateForm.location}>
+              <Select onValueChange={handleLocationChange} value={realEstateForm.location} required>
                 <SelectTrigger>
                   <SelectValue placeholder="Select location" />
                 </SelectTrigger>
@@ -139,6 +142,7 @@ const AdminDashboard = () => {
                   <Select
                     onValueChange={(value) => handleRoomTypeChange(index, 'type', value)}
                     value={room.type}
+                    required
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Room type" />
@@ -154,6 +158,7 @@ const AdminDashboard = () => {
                     placeholder="Price"
                     value={room.price}
                     onChange={(e) => handleRoomTypeChange(index, 'price', e.target.value)}
+                    required
                   />
                 </div>
               ))}
@@ -181,6 +186,7 @@ const AdminDashboard = () => {
                 type="file"
                 accept="image/png"
                 onChange={handleImageUpload}
+                required
               />
             </div>
             <div className="flex space-x-2">

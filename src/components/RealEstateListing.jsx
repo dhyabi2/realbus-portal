@@ -9,7 +9,9 @@ const RealEstateListing = ({ listing }) => {
         <CardTitle>{listing.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <img src={listing.image} alt={listing.name} className="w-full h-48 object-cover mb-4 rounded" />
+        {listing.image && (
+          <img src={listing.image} alt={listing.name} className="w-full h-48 object-cover mb-4 rounded" />
+        )}
         <p className="text-sm text-gray-600 mb-2">Location: {listing.location}</p>
         <div className="mb-4">
           <h4 className="font-semibold mb-2">Room Types:</h4>

@@ -9,10 +9,8 @@ const Index = () => {
   const [realEstateListings, setRealEstateListings] = useState([]);
 
   useEffect(() => {
-    const storedListings = getFromLocalStorage('realEstateListings');
-    if (storedListings) {
-      setRealEstateListings(storedListings);
-    }
+    const storedListings = getFromLocalStorage('realEstateListings') || [];
+    setRealEstateListings(storedListings);
   }, []);
 
   return (
@@ -35,8 +33,8 @@ const Index = () => {
       <div className="w-full max-w-4xl">
         <h2 className="text-2xl font-bold mb-4">Featured Real Estate Listings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {realEstateListings.map((listing, index) => (
-            <RealEstateListing key={index} listing={listing} />
+          {realEstateListings.map((listing) => (
+            <RealEstateListing key={listing.id} listing={listing} />
           ))}
         </div>
       </div>
