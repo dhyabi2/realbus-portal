@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { saveToLocalStorage, getFromLocalStorage } from '../utils/localStorage';
 
 const AdminDashboard = () => {
   const [realEstateListings, setRealEstateListings] = useState([]);
@@ -17,6 +18,13 @@ const AdminDashboard = () => {
     features: [],
     image: null
   });
+
+  useEffect(() => {
+    const storedRealEstateListings = getFromLocalStorage('realEstateListings');
+    const storedBusListings = getFromLocalStorage('busListings');
+    if (storedRealEstateListings) setRealEstateListings(storedRealEstateListings);
+    if (storedBusListings) setBusListings(storedBusListings);
+  }, []);
 
   const locations = ["مسقط", "بوشر", "السيب", "مطرح", "العامرات", "قريات"];
   const roomTypeOptions = ["1 in a room", "2 in a room", "3 in a room", "4 in a room"];
@@ -33,7 +41,7 @@ const AdminDashboard = () => {
 
   const handleRoomTypeChange = (index, field, value) => {
     const newRoomTypes = [...realEstateForm.roomTypes];
-    newRoomTypes[index][field] = value;
+    newRoomTypes[index][field] = field === 'price' ? Number(value) : value;
     setRealEstateForm(prev => ({ ...prev, roomTypes: newRoomTypes }));
   };
 
@@ -68,7 +76,9 @@ const AdminDashboard = () => {
 
   const handleAddRealEstate = (e) => {
     e.preventDefault();
-    setRealEstateListings(prev => [...prev, realEstateForm]);
+    const newListings = [...realEstateListings, realEstateForm];
+    setRealEstateListings(newListings);
+    saveToLocalStorage('realEstateListings', newListings);
     resetRealEstateForm();
   };
 
