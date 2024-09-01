@@ -19,7 +19,7 @@ const AdminDashboard = () => {
   });
 
   const locations = ["مسقط", "بوشر", "السيب", "مطرح", "العامرات", "قريات"];
-  const roomTypeOptions = ["Single", "Double", "Suite", "Apartment"];
+  const roomTypeOptions = ["1 in a room", "2 in a room", "3 in a room", "4 in a room"];
   const featureOptions = ["WiFi", "Parking", "Air Conditioning", "TV", "Kitchen"];
 
   const handleRealEstateInputChange = (e) => {

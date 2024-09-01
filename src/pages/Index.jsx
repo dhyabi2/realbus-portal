@@ -12,9 +12,9 @@ const Index = () => {
       name: 'Luxury Villa',
       location: 'مسقط',
       roomTypes: [
-        { type: 'Single', price: 50 },
-        { type: 'Double', price: 80 },
-        { type: 'Suite', price: 120 }
+        { type: '1 in a room', price: 50 },
+        { type: '2 in a room', price: 80 },
+        { type: '3 in a room', price: 120 }
       ],
       features: ['WiFi', 'Parking', 'Air Conditioning'],
       image: 'https://example.com/luxury-villa.png'
@@ -24,8 +24,8 @@ const Index = () => {
       name: 'Cozy Apartment',
       location: 'بوشر',
       roomTypes: [
-        { type: 'Single', price: 40 },
-        { type: 'Double', price: 70 }
+        { type: '1 in a room', price: 40 },
+        { type: '2 in a room', price: 70 }
       ],
       features: ['WiFi', 'TV'],
       image: 'https://example.com/cozy-apartment.png'
