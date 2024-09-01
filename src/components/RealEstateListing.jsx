@@ -4,32 +4,30 @@ import { Badge } from "@/components/ui/badge";
 
 const RealEstateListing = ({ listing }) => {
   return (
-    <Card className="w-full overflow-hidden transition-all duration-300 hover:shadow-xl">
-      <CardHeader className="bg-gradient-to-r from-pink-200 to-purple-200">
-        <CardTitle className="text-2xl font-bold text-pink-700">{listing.name}</CardTitle>
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>{listing.name}</CardTitle>
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent>
         {listing.image && (
-          <img src={listing.image} alt={listing.name} className="w-full h-48 object-cover mb-4 rounded-lg shadow-md" />
+          <img src={listing.image} alt={listing.name} className="w-full h-48 object-cover mb-4 rounded" />
         )}
-        <p className="text-lg text-gray-700 mb-2">📍 {listing.location}</p>
+        <p className="text-sm text-gray-600 mb-2">Location: {listing.location}</p>
         <div className="mb-4">
-          <h4 className="font-semibold mb-2 text-pink-600">🛏️ Room Types:</h4>
-          <ul className="space-y-1">
+          <h4 className="font-semibold mb-2">Room Types:</h4>
+          <ul>
             {listing.roomTypes.map((room, index) => (
-              <li key={index} className="text-sm text-gray-600">
-                {room.type}: 💰 ${room.price} per night
+              <li key={index} className="text-sm">
+                {room.type}: ${room.price} per night
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold mb-2 text-pink-600">✨ Features:</h4>
+          <h4 className="font-semibold mb-2">Features:</h4>
           <div className="flex flex-wrap gap-2">
             {listing.features.map((feature, index) => (
-              <Badge key={index} variant="secondary" className="bg-purple-100 text-purple-700">
-                {feature}
-              </Badge>
+              <Badge key={index} variant="secondary">{feature}</Badge>
             ))}
           </div>
         </div>
