@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
               <circle cx="15" cy="30" r="3" fill="#FF7A7A"/>
               <circle cx="25" cy="30" r="3" fill="#FF7A7A"/>
             </svg>
-            <span className="text-2xl font-bold">بوابة السكن والباص</span>
+            <span className="text-2xl font-bold">سكني</span>
           </Link>
         </div>
       </header>
