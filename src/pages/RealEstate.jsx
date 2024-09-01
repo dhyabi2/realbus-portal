@@ -12,7 +12,7 @@ const RealEstate = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-primary">Real Estate Listings</h1>
+      <h1 className="text-2xl font-bold text-primary">قوائم العقارات</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {realEstateListings.map((listing) => (
           <RealEstateListing key={listing.id} listing={listing} />

@@ -12,22 +12,22 @@ const AdminLogin = () => {
     if (password === '123') {
       navigate('/admin/dashboard');
     } else {
-      alert('Invalid password');
+      alert('كلمة المرور غير صحيحة');
     }
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
       <form onSubmit={handleLogin} className="space-y-4">
-        <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
+        <h1 className="text-2xl font-bold mb-4">تسجيل دخول المسؤول</h1>
         <Input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter password"
+          placeholder="أدخل كلمة المرور"
           className="w-full"
         />
-        <Button type="submit" className="w-full">Login</Button>
+        <Button type="submit" className="w-full">تسجيل الدخول</Button>
       </form>
     </div>
   );

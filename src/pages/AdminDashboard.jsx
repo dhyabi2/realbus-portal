@@ -27,8 +27,8 @@ const AdminDashboard = () => {
   }, []);
 
   const locations = ["مسقط", "بوشر", "السيب", "مطرح", "العامرات", "قريات"];
-  const roomTypeOptions = ["1 in a room", "2 in a room", "3 in a room", "4 in a room"];
-  const featureOptions = ["WiFi", "Parking", "Air Conditioning", "TV", "Kitchen"];
+  const roomTypeOptions = ["غرفة لشخص واحد", "غرفة لشخصين", "غرفة لثلاثة أشخاص", "غرفة لأربعة أشخاص"];
+  const featureOptions = ["واي فاي", "موقف سيارات", "تكييف", "تلفزيون", "مطبخ"];
 
   const handleRealEstateInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
       };
       reader.readAsDataURL(file);
     } else {
-      alert("Please upload a PNG image.");
+      alert("الرجاء تحميل صورة بصيغة PNG.");
     }
   };
 
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
     setRealEstateListings(updatedListings);
     saveToLocalStorage('realEstateListings', updatedListings);
     resetRealEstateForm();
-    alert('Real estate listing added successfully!');
+    alert('تمت إضافة قائمة العقارات بنجاح!');
   };
 
   const resetRealEstateForm = () => {
@@ -97,36 +97,36 @@ const AdminDashboard = () => {
   const handleAddBus = (e) => {
     e.preventDefault();
     // TODO: Implement bus listing addition
-    console.log('Add bus listing');
+    console.log('إضافة قائمة الحافلات');
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4">لوحة تحكم المسؤول</h1>
       <Tabs defaultValue="real-estate">
         <TabsList>
-          <TabsTrigger value="real-estate">Real Estate</TabsTrigger>
-          <TabsTrigger value="buses">Buses</TabsTrigger>
+          <TabsTrigger value="real-estate">العقارات</TabsTrigger>
+          <TabsTrigger value="buses">الحافلات</TabsTrigger>
         </TabsList>
         <TabsContent value="real-estate">
-          <h2 className="text-xl font-semibold mb-2">Add Real Estate Listing</h2>
+          <h2 className="text-xl font-semibold mb-2">إضافة قائمة عقارات</h2>
           <form onSubmit={handleAddRealEstate} className="space-y-4">
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">الاسم</Label>
               <Input
                 id="name"
                 name="name"
                 value={realEstateForm.name}
                 onChange={handleRealEstateInputChange}
-                placeholder="Property Name"
+                placeholder="اسم العقار"
                 required
               />
             </div>
             <div>
-              <Label htmlFor="location">Location</Label>
+              <Label htmlFor="location">الموقع</Label>
               <Select onValueChange={handleLocationChange} value={realEstateForm.location} required>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select location" />
+                  <SelectValue placeholder="اختر الموقع" />
                 </SelectTrigger>
                 <SelectContent>
                   {locations.map(location => (
@@ -136,16 +136,16 @@ const AdminDashboard = () => {
               </Select>
             </div>
             <div>
-              <Label>Room Types</Label>
+              <Label>أنواع الغرف</Label>
               {realEstateForm.roomTypes.map((room, index) => (
-                <div key={index} className="flex space-x-2 mb-2">
+                <div key={index} className="flex space-x-2 mb-2 rtl:space-x-reverse">
                   <Select
                     onValueChange={(value) => handleRoomTypeChange(index, 'type', value)}
                     value={room.type}
                     required
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Room type" />
+                      <SelectValue placeholder="نوع الغرفة" />
                     </SelectTrigger>
                     <SelectContent>
                       {roomTypeOptions.map(type => (
@@ -155,20 +155,20 @@ const AdminDashboard = () => {
                   </Select>
                   <Input
                     type="number"
-                    placeholder="Price"
+                    placeholder="السعر"
                     value={room.price}
                     onChange={(e) => handleRoomTypeChange(index, 'price', e.target.value)}
                     required
                   />
                 </div>
               ))}
-              <Button type="button" onClick={addRoomType}>Add Room Type</Button>
+              <Button type="button" onClick={addRoomType}>إضافة نوع غرفة</Button>
             </div>
             <div>
-              <Label>Features</Label>
+              <Label>المميزات</Label>
               <div className="flex flex-wrap gap-4">
                 {featureOptions.map(feature => (
-                  <div key={feature} className="flex items-center space-x-2">
+                  <div key={feature} className="flex items-center space-x-2 rtl:space-x-reverse">
                     <Checkbox
                       id={feature}
                       checked={realEstateForm.features.includes(feature)}
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div>
-              <Label htmlFor="image">Image (PNG only)</Label>
+              <Label htmlFor="image">الصورة (PNG فقط)</Label>
               <Input
                 id="image"
                 type="file"
@@ -189,32 +189,32 @@ const AdminDashboard = () => {
                 required
               />
             </div>
-            <div className="flex space-x-2">
-              <Button type="submit">Add Real Estate</Button>
-              <Button type="button" onClick={resetRealEstateForm} variant="outline">Reset Form</Button>
+            <div className="flex space-x-2 rtl:space-x-reverse">
+              <Button type="submit">إضافة عقار</Button>
+              <Button type="button" onClick={resetRealEstateForm} variant="outline">إعادة تعيين النموذج</Button>
             </div>
           </form>
         </TabsContent>
         <TabsContent value="buses">
-          <h2 className="text-xl font-semibold mb-2">Add Bus Listing</h2>
+          <h2 className="text-xl font-semibold mb-2">إضافة قائمة حافلات</h2>
           <form onSubmit={handleAddBus} className="space-y-4">
             <div>
-              <Label htmlFor="busName">Name</Label>
-              <Input id="busName" placeholder="Bus Name" />
+              <Label htmlFor="busName">الاسم</Label>
+              <Input id="busName" placeholder="اسم الحافلة" />
             </div>
             <div>
-              <Label htmlFor="from">From</Label>
-              <Input id="from" placeholder="Departure Location" />
+              <Label htmlFor="from">من</Label>
+              <Input id="from" placeholder="موقع المغادرة" />
             </div>
             <div>
-              <Label htmlFor="to">To</Label>
-              <Input id="to" placeholder="Arrival Location" />
+              <Label htmlFor="to">إلى</Label>
+              <Input id="to" placeholder="موقع الوصول" />
             </div>
             <div>
-              <Label htmlFor="busImage">Image</Label>
+              <Label htmlFor="busImage">الصورة</Label>
               <Input id="busImage" type="file" accept="image/png" />
             </div>
-            <Button type="submit">Add Bus</Button>
+            <Button type="submit">إضافة حافلة</Button>
           </form>
         </TabsContent>
       </Tabs>

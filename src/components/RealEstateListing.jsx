@@ -12,19 +12,19 @@ const RealEstateListing = ({ listing }) => {
         {listing.image && (
           <img src={listing.image} alt={listing.name} className="w-full h-48 object-cover mb-4 rounded" />
         )}
-        <p className="text-sm text-gray-600 mb-2">Location: {listing.location}</p>
+        <p className="text-sm text-gray-600 mb-2">الموقع: {listing.location}</p>
         <div className="mb-4">
-          <h4 className="font-semibold mb-2 text-primary">Room Types:</h4>
+          <h4 className="font-semibold mb-2 text-primary">أنواع الغرف:</h4>
           <ul className="space-y-1">
             {listing.roomTypes.map((room, index) => (
               <li key={index} className="text-sm">
-                {room.type}: ${room.price} per night
+                {room.type}: {room.price} ريال عُماني في الليلة
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold mb-2 text-primary">Features:</h4>
+          <h4 className="font-semibold mb-2 text-primary">المميزات:</h4>
           <div className="flex flex-wrap gap-2">
             {listing.features.map((feature, index) => (
               <Badge key={index} variant="secondary" className="bg-accent text-accent-foreground">{feature}</Badge>

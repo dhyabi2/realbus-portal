@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -73,10 +73,29 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-tajawal;
+    direction: rtl;
   }
 }
 
-.font-inter {
-  font-family: 'Inter', sans-serif;
+.font-tajawal {
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* RTL support for Tailwind classes */
+.rtl\:text-right {
+  text-align: right;
+}
+
+.rtl\:mr-0 {
+  margin-right: 0;
+}
+
+.rtl\:ml-2 {
+  margin-left: 0.5rem;
+}
+
+.rtl\:space-x-reverse > * + * {
+  margin-right: 0.5rem;
+  margin-left: 0;
 }
