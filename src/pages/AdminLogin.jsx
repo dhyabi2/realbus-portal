@@ -9,8 +9,7 @@ const AdminLogin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // TODO: Implement actual authentication logic
-    if (password === 'admin') {
+    if (password === '123') {
       navigate('/admin/dashboard');
     } else {
       alert('Invalid password');
