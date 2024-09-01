@@ -19,6 +19,13 @@ const AdminDashboard = () => {
     image: null
   });
 
+  const [busForm, setBusForm] = useState({
+    name: '',
+    from: '',
+    to: '',
+    image: null
+  });
+
   useEffect(() => {
     const storedRealEstateListings = getFromLocalStorage('realEstateListings') || [];
     const storedBusListings = getFromLocalStorage('busListings') || [];
@@ -33,6 +40,11 @@ const AdminDashboard = () => {
   const handleRealEstateInputChange = (e) => {
     const { name, value } = e.target;
     setRealEstateForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleBusInputChange = (e) => {
+    const { name, value } = e.target;
+    setBusForm(prev => ({ ...prev, [name]: value }));
   };
 
   const handleLocationChange = (value) => {
@@ -61,12 +73,16 @@ const AdminDashboard = () => {
     }));
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e, formType) => {
     const file = e.target.files[0];
     if (file && file.type === "image/png") {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setRealEstateForm(prev => ({ ...prev, image: reader.result }));
+        if (formType === 'realEstate') {
+          setRealEstateForm(prev => ({ ...prev, image: reader.result }));
+        } else {
+          setBusForm(prev => ({ ...prev, image: reader.result }));
+        }
       };
       reader.readAsDataURL(file);
     } else {
@@ -84,6 +100,16 @@ const AdminDashboard = () => {
     alert('تمت إضافة قائمة السكنات بنجاح!');
   };
 
+  const handleAddBus = (e) => {
+    e.preventDefault();
+    const newBus = { ...busForm, id: Date.now() };
+    const updatedBusListings = [...busListings, newBus];
+    setBusListings(updatedBusListings);
+    saveToLocalStorage('busListings', updatedBusListings);
+    resetBusForm();
+    alert('تمت إضافة قائمة الباصات بنجاح!');
+  };
+
   const resetRealEstateForm = () => {
     setRealEstateForm({
       name: '',
@@ -94,10 +120,13 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleAddBus = (e) => {
-    e.preventDefault();
-    // TODO: Implement bus listing addition
-    console.log('إضافة قائمة الباصات');
+  const resetBusForm = () => {
+    setBusForm({
+      name: '',
+      from: '',
+      to: '',
+      image: null
+    });
   };
 
   return (
@@ -182,12 +211,12 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div className="text-right">
-              <Label htmlFor="image" className="block mb-1">الصورة (PNG فقط)</Label>
+              <Label htmlFor="realEstateImage" className="block mb-1">الصورة (PNG فقط)</Label>
               <Input
-                id="image"
+                id="realEstateImage"
                 type="file"
                 accept="image/png"
-                onChange={handleImageUpload}
+                onChange={(e) => handleImageUpload(e, 'realEstate')}
                 required
                 className="w-full"
               />
@@ -203,19 +232,50 @@ const AdminDashboard = () => {
           <form onSubmit={handleAddBus} className="space-y-4">
             <div className="text-right">
               <Label htmlFor="busName" className="block mb-1">الاسم</Label>
-              <Input id="busName" placeholder="اسم الباص" className="w-full" />
+              <Input
+                id="busName"
+                name="name"
+                value={busForm.name}
+                onChange={handleBusInputChange}
+                placeholder="اسم الباص"
+                required
+                className="w-full"
+              />
             </div>
             <div className="text-right">
               <Label htmlFor="from" className="block mb-1">من</Label>
-              <Input id="from" placeholder="موقع المغادرة" className="w-full" />
+              <Input
+                id="from"
+                name="from"
+                value={busForm.from}
+                onChange={handleBusInputChange}
+                placeholder="موقع المغادرة"
+                required
+                className="w-full"
+              />
             </div>
             <div className="text-right">
               <Label htmlFor="to" className="block mb-1">إلى</Label>
-              <Input id="to" placeholder="موقع الوصول" className="w-full" />
+              <Input
+                id="to"
+                name="to"
+                value={busForm.to}
+                onChange={handleBusInputChange}
+                placeholder="موقع الوصول"
+                required
+                className="w-full"
+              />
             </div>
             <div className="text-right">
-              <Label htmlFor="busImage" className="block mb-1">الصورة</Label>
-              <Input id="busImage" type="file" accept="image/png" className="w-full" />
+              <Label htmlFor="busImage" className="block mb-1">الصورة (PNG فقط)</Label>
+              <Input
+                id="busImage"
+                type="file"
+                accept="image/png"
+                onChange={(e) => handleImageUpload(e, 'bus')}
+                required
+                className="w-full"
+              />
             </div>
             <div className="flex justify-end">
               <Button type="submit">إضافة باص</Button>
