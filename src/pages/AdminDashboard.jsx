@@ -97,7 +97,7 @@ const AdminDashboard = () => {
   const handleAddBus = (e) => {
     e.preventDefault();
     // TODO: Implement bus listing addition
-    console.log('إضافة قائمة الحافلات');
+    console.log('إضافة قائمة الباصات');
   };
 
   return (
@@ -106,7 +106,7 @@ const AdminDashboard = () => {
       <Tabs defaultValue="real-estate">
         <TabsList>
           <TabsTrigger value="real-estate">السكنات</TabsTrigger>
-          <TabsTrigger value="buses">الحافلات</TabsTrigger>
+          <TabsTrigger value="buses">الباصات</TabsTrigger>
         </TabsList>
         <TabsContent value="real-estate">
           <h2 className="text-xl font-semibold mb-2">إضافة قائمة سكنات</h2>
@@ -196,11 +196,11 @@ const AdminDashboard = () => {
           </form>
         </TabsContent>
         <TabsContent value="buses">
-          <h2 className="text-xl font-semibold mb-2">إضافة قائمة حافلات</h2>
+          <h2 className="text-xl font-semibold mb-2">إضافة قائمة باصات</h2>
           <form onSubmit={handleAddBus} className="space-y-4">
             <div>
               <Label htmlFor="busName">الاسم</Label>
-              <Input id="busName" placeholder="اسم الحافلة" />
+              <Input id="busName" placeholder="اسم الباص" />
             </div>
             <div>
               <Label htmlFor="from">من</Label>
@@ -214,7 +214,7 @@ const AdminDashboard = () => {
               <Label htmlFor="busImage">الصورة</Label>
               <Input id="busImage" type="file" accept="image/png" />
             </div>
-            <Button type="submit">إضافة حافلة</Button>
+            <Button type="submit">إضافة باص</Button>
           </form>
         </TabsContent>
       </Tabs>
