@@ -6,12 +6,12 @@ const Layout = ({ children }) => {
   const location = useLocation();
 
   const isActive = (path) => {
-    return location.pathname === path ? 'text-blue-500' : 'text-gray-500';
+    return location.pathname === path ? 'text-primary' : 'text-gray-500';
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-blue-600 text-white p-4">
+    <div className="flex flex-col min-h-screen bg-background font-inter">
+      <header className="bg-primary text-white p-4">
         <div className="container mx-auto">
           <Link to="/" className="text-2xl font-bold">RealBus Portal</Link>
         </div>
