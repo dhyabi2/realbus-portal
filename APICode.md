@@ -1,6 +1,6 @@
 # API Code for سكني Application
 
-This Node.js API replaces the localStorage functionality with server-side storage using a JSON file.
+This Node.js API replaces the localStorage functionality with server-side storage using a JSON file and includes password validation for each endpoint.
 
 ## Setup
 
@@ -18,12 +18,28 @@ const cors = require('cors');
 const fs = require('fs').promises;
 
 const app = express();
-const port = 3001;
+const port = 443;
+const ADMIN_PASSWORD = 'hakima234';
 
 app.use(cors());
 app.use(bodyParser.json());
 
 const DATA_FILE = 'data.json';
+
+// Middleware for password validation
+const validatePassword = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const password = authHeader.split(' ')[1];
+    if (password === ADMIN_PASSWORD) {
+      next();
+    } else {
+      res.status(401).json({ error: 'Unauthorized' });
+    }
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
 
 // Initialize data file if it doesn't exist
 async function initializeDataFile() {
@@ -49,13 +65,13 @@ async function writeData(data) {
 }
 
 // GET /api/realEstateListings
-app.get('/api/realEstateListings', async (req, res) => {
+app.get('/api/realEstateListings', validatePassword, async (req, res) => {
   const data = await readData();
   res.json(data.realEstateListings);
 });
 
 // POST /api/realEstateListings
-app.post('/api/realEstateListings', async (req, res) => {
+app.post('/api/realEstateListings', validatePassword, async (req, res) => {
   const data = await readData();
   const newListing = { ...req.body, id: Date.now() };
   data.realEstateListings.push(newListing);
@@ -64,13 +80,13 @@ app.post('/api/realEstateListings', async (req, res) => {
 });
 
 // GET /api/busListings
-app.get('/api/busListings', async (req, res) => {
+app.get('/api/busListings', validatePassword, async (req, res) => {
   const data = await readData();
   res.json(data.busListings);
 });
 
 // POST /api/busListings
-app.post('/api/busListings', async (req, res) => {
+app.post('/api/busListings', validatePassword, async (req, res) => {
   const data = await readData();
   const newBus = { ...req.body, id: Date.now() };
   data.busListings.push(newBus);
@@ -94,7 +110,7 @@ initializeDataFile().then(() => {
    node server.js
    ```
 
-The API will be available at `http://localhost:3001`.
+The API will be available at `https://sakni-api.replit.app:443`.
 
 ## API Endpoints
 
@@ -103,6 +119,8 @@ The API will be available at `http://localhost:3001`.
 - GET /api/busListings: Fetch all bus listings
 - POST /api/busListings: Add a new bus listing
 
+All endpoints require password authentication using the Bearer token in the Authorization header.
+
 ## Integrating with Frontend
 
-Update the frontend code to use these API endpoints instead of localStorage. Replace the localStorage utility functions with API calls using fetch or axios.
+Update the frontend code to include the password in the Authorization header for all API requests. The `localStorage.js` utility has been updated to include this functionality.
