@@ -19,7 +19,7 @@ const fs = require('fs').promises;
 
 const app = express();
 const port = 443;
-const ADMIN_PASSWORD = 'hakima234';
+const ADMIN_PASSWORD = 'hakima234'; // Define the admin password
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -123,4 +123,40 @@ All endpoints require password authentication using the Bearer token in the Auth
 
 ## Integrating with Frontend
 
-Update the frontend code to include the password in the Authorization header for all API requests. The `localStorage.js` utility has been updated to include this functionality.
+Update the frontend code to include the password in the Authorization header for all API requests. The `localStorage.js` utility should be updated to include this functionality.
+
+Example of how to use the API in the frontend:
+
+```javascript
+const API_BASE_URL = 'https://sakni-api.replit.app:443/api';
+const ADMIN_PASSWORD = 'hakima234';
+
+async function fetchData(endpoint) {
+  const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+    headers: {
+      'Authorization': `Bearer ${ADMIN_PASSWORD}`
+    }
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
+}
+
+async function postData(endpoint, data) {
+  const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ADMIN_PASSWORD}`
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
+}
+```
+
+Make sure to use these functions when interacting with the API in your React components.
