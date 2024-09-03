@@ -92,7 +92,9 @@ const AdminDashboard = () => {
 
   const handleAddRealEstate = (e) => {
     e.preventDefault();
-    const newListing = { ...realEstateForm, id: Date.now() };
+    // Filter out empty room types
+    const filteredRoomTypes = realEstateForm.roomTypes.filter(room => room.type !== '' && room.price !== '');
+    const newListing = { ...realEstateForm, roomTypes: filteredRoomTypes, id: Date.now() };
     const updatedListings = [...realEstateListings, newListing];
     setRealEstateListings(updatedListings);
     saveToLocalStorage('realEstateListings', updatedListings);
@@ -172,7 +174,7 @@ const AdminDashboard = () => {
                   <Select
                     onValueChange={(value) => handleRoomTypeChange(index, 'type', value)}
                     value={room.type}
-                    required
+                    required={index === 0} // Only the first room type is required
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="نوع الغرفة" />
@@ -188,7 +190,7 @@ const AdminDashboard = () => {
                     placeholder="السعر"
                     value={room.price}
                     onChange={(e) => handleRoomTypeChange(index, 'price', e.target.value)}
-                    required
+                    required={index === 0} // Only the first room type is required
                     className="w-1/3"
                   />
                 </div>
