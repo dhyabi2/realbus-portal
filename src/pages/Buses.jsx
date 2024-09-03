@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getFromLocalStorage } from '../utils/localStorage';
 
 const BusListing = ({ bus }) => {
@@ -17,10 +18,10 @@ const BusListing = ({ bus }) => {
         <p className="text-sm text-gray-600 mb-2">من: {bus.from}</p>
         <p className="text-sm text-gray-600 mb-2">إلى: {bus.to}</p>
         <Button 
-          as="a" 
-          href="https://wa.me/96899195564" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          as={Link}
+          to="https://wa.me/96899195564"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white"
         >
           <MessageCircle className="mr-2 h-4 w-4" /> تواصل الآن
