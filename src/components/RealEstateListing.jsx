@@ -33,15 +33,14 @@ const RealEstateListing = ({ listing }) => {
             ))}
           </div>
         </div>
-        <Button 
-          as="a" 
+        <a 
           href="https://wa.me/96899195564" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white"
+          className="w-full mt-4 inline-flex items-center justify-center rounded-md bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           <MessageCircle className="mr-2 h-4 w-4" /> تواصل الآن
-        </Button>
+        </a>
       </CardContent>
     </Card>
   );
