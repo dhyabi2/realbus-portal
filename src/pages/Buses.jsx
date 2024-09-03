@@ -32,11 +32,28 @@ const BusListing = ({ bus }) => {
 
 const Buses = () => {
   const [busListings, setBusListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const storedBusListings = getFromLocalStorage('busListings') || [];
-    setBusListings(storedBusListings);
+    const fetchBusListings = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getFromLocalStorage('busListings');
+        setBusListings(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error('Error fetching bus listings:', err);
+        setError('Failed to load bus listings. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBusListings();
   }, []);
+
+  if (isLoading) return <p className="text-center">جاري التحميل...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <div className="space-y-6">
