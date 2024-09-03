@@ -18,7 +18,7 @@ const BusListing = ({ bus }) => {
         <p className="text-sm text-gray-600 mb-2">إلى: {bus.to}</p>
         <Button 
           as="a" 
-          href="https://wa.me/96896672579" 
+          href="https://wa.me/96899195564" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white"
