@@ -6,8 +6,11 @@ const RealEstate = () => {
   const [realEstateListings, setRealEstateListings] = useState([]);
 
   useEffect(() => {
-    const storedListings = getFromLocalStorage('realEstateListings') || [];
-    setRealEstateListings(storedListings);
+    const fetchListings = async () => {
+      const storedListings = await getFromLocalStorage('realEstateListings') || [];
+      setRealEstateListings(storedListings);
+    };
+    fetchListings();
   }, []);
 
   return (

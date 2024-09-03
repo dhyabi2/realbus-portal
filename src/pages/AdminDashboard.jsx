@@ -27,10 +27,13 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    const storedRealEstateListings = getFromLocalStorage('realEstateListings') || [];
-    const storedBusListings = getFromLocalStorage('busListings') || [];
-    setRealEstateListings(storedRealEstateListings);
-    setBusListings(storedBusListings);
+    const fetchData = async () => {
+      const storedRealEstateListings = await getFromLocalStorage('realEstateListings') || [];
+      const storedBusListings = await getFromLocalStorage('busListings') || [];
+      setRealEstateListings(storedRealEstateListings);
+      setBusListings(storedBusListings);
+    };
+    fetchData();
   }, []);
 
   const locations = ["مسقط", "بوشر", "السيب", "مطرح", "العامرات", "قريات"];
@@ -90,26 +93,27 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleAddRealEstate = (e) => {
+  const handleAddRealEstate = async (e) => {
     e.preventDefault();
     // Filter out empty room types
     const filteredRoomTypes = realEstateForm.roomTypes.filter(room => room.type !== '' && room.price !== '');
-    const newListing = { ...realEstateForm, roomTypes: filteredRoomTypes, id: Date.now() };
-    const updatedListings = [...realEstateListings, newListing];
-    setRealEstateListings(updatedListings);
-    saveToLocalStorage('realEstateListings', updatedListings);
-    resetRealEstateForm();
-    alert('تمت إضافة قائمة السكنات بنجاح!');
+    const newListing = { ...realEstateForm, roomTypes: filteredRoomTypes };
+    const addedListing = await saveToLocalStorage('realEstateListings', newListing);
+    if (addedListing) {
+      setRealEstateListings(prev => [...prev, addedListing]);
+      resetRealEstateForm();
+      alert('تمت إضافة قائمة السكنات بنجاح!');
+    }
   };
 
-  const handleAddBus = (e) => {
+  const handleAddBus = async (e) => {
     e.preventDefault();
-    const newBus = { ...busForm, id: Date.now() };
-    const updatedBusListings = [...busListings, newBus];
-    setBusListings(updatedBusListings);
-    saveToLocalStorage('busListings', updatedBusListings);
-    resetBusForm();
-    alert('تمت إضافة قائمة الباصات بنجاح!');
+    const addedBus = await saveToLocalStorage('busListings', busForm);
+    if (addedBus) {
+      setBusListings(prev => [...prev, addedBus]);
+      resetBusForm();
+      alert('تمت إضافة قائمة الباصات بنجاح!');
+    }
   };
 
   const resetRealEstateForm = () => {

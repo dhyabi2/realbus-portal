@@ -1,19 +1,36 @@
-// Utility functions for localStorage operations
+// Utility functions for API operations
 
-export const saveToLocalStorage = (key, data) => {
+const API_BASE_URL = 'http://localhost:3001/api';
+
+export const saveToLocalStorage = async (key, data) => {
   try {
-    localStorage.setItem(key, JSON.stringify(data));
+    const endpoint = key === 'realEstateListings' ? 'realEstateListings' : 'busListings';
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
   } catch (error) {
-    console.error('Error saving to localStorage:', error);
+    console.error('Error saving data:', error);
   }
 };
 
-export const getFromLocalStorage = (key) => {
+export const getFromLocalStorage = async (key) => {
   try {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
+    const endpoint = key === 'realEstateListings' ? 'realEstateListings' : 'busListings';
+    const response = await fetch(`${API_BASE_URL}/${endpoint}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
   } catch (error) {
-    console.error('Error getting from localStorage:', error);
+    console.error('Error getting data:', error);
     return null;
   }
 };
