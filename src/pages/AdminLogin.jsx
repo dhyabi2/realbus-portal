@@ -9,7 +9,7 @@ const AdminLogin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (password === '123') {
+    if (password === 'hakima234') {
       navigate('/admin/dashboard');
     } else {
       alert('كلمة المرور غير صحيحة');
