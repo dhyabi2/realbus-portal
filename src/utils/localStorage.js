@@ -1,6 +1,6 @@
 // Utility functions for API operations
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = 'https://sakni-api.replit.app/api';
 
 export const saveToLocalStorage = async (key, data) => {
   try {
