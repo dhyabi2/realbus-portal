@@ -4,8 +4,14 @@ const urlsToCache = [
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
-  '/icon-192x192.png',
-  '/icon-512x512.png',
+  '/icons/icon-72x72.png',
+  '/icons/icon-96x96.png',
+  '/icons/icon-128x128.png',
+  '/icons/icon-144x144.png',
+  '/icons/icon-152x152.png',
+  '/icons/icon-192x192.png',
+  '/icons/icon-384x384.png',
+  '/icons/icon-512x512.png',
   '/src/main.jsx',
   '/src/App.jsx',
   '/src/index.css'
@@ -57,12 +63,11 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Push notifications
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data.text(),
-    icon: '/icon-192x192.png',
-    badge: '/badge-icon.png'
+    icon: '/icons/icon-192x192.png',
+    badge: '/icons/icon-72x72.png'
   };
 
   event.waitUntil(
@@ -70,7 +75,6 @@ self.addEventListener('push', (event) => {
   );
 });
 
-// Background Sync
 self.addEventListener('sync', (event) => {
   if (event.tag === 'sync-data') {
     event.waitUntil(syncData());
@@ -82,7 +86,6 @@ async function syncData() {
   // For example, send pending updates to the server
 }
 
-// Periodic Sync
 self.addEventListener('periodicsync', (event) => {
   if (event.tag === 'update-content') {
     event.waitUntil(updateContent());
