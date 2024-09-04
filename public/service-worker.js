@@ -56,3 +56,40 @@ self.addEventListener('activate', (event) => {
     })
   );
 });
+
+// Push notifications
+self.addEventListener('push', (event) => {
+  const options = {
+    body: event.data.text(),
+    icon: '/icon-192x192.png',
+    badge: '/badge-icon.png'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('سكني Notification', options)
+  );
+});
+
+// Background Sync
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-data') {
+    event.waitUntil(syncData());
+  }
+});
+
+async function syncData() {
+  // Implement your data synchronization logic here
+  // For example, send pending updates to the server
+}
+
+// Periodic Sync
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'update-content') {
+    event.waitUntil(updateContent());
+  }
+});
+
+async function updateContent() {
+  // Implement your periodic content update logic here
+  // For example, fetch new data from the server and update the cache
+}
