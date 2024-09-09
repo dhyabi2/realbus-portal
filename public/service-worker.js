@@ -53,6 +53,9 @@ self.addEventListener('fetch', (event) => {
           }
         );
       })
+      .catch(() => {
+        return caches.match('/offline.html');
+      })
   );
 });
 
