@@ -3,6 +3,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageCircle } from 'lucide-react';
 import { getFromLocalStorage } from '../utils/localStorage';
 
+const dummyBusListings = [
+  {
+    id: 1,
+    name: "باص سريع مسقط - صلالة",
+    from: "مسقط",
+    to: "صلالة",
+    image: "https://example.com/dummy-bus-1.jpg"
+  },
+  {
+    id: 2,
+    name: "رحلة مريحة نزوى - صحار",
+    from: "نزوى",
+    to: "صحار",
+    image: "https://example.com/dummy-bus-2.jpg"
+  }
+];
+
 const BusListing = ({ bus }) => {
   return (
     <Card className="w-full bg-white shadow-sm">
@@ -38,10 +55,15 @@ const Buses = () => {
       try {
         setIsLoading(true);
         const data = await getFromLocalStorage('busListings');
-        setBusListings(Array.isArray(data) ? data : []);
+        if (Array.isArray(data) && data.length > 0) {
+          setBusListings(data);
+        } else {
+          setBusListings(dummyBusListings);
+        }
       } catch (err) {
         console.error('Error fetching bus listings:', err);
         setError('Failed to load bus listings. Please try again later.');
+        setBusListings(dummyBusListings);
       } finally {
         setIsLoading(false);
       }
