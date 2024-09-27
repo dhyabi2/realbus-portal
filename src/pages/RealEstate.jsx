@@ -2,42 +2,13 @@ import React, { useEffect, useState } from 'react';
 import RealEstateListing from '../components/RealEstateListing';
 import { getFromLocalStorage } from '../utils/localStorage';
 
-const dummyRealEstateListings = [
-  {
-    id: 1,
-    name: "شقة فاخرة في مسقط",
-    location: "مسقط",
-    image: "https://example.com/dummy-real-estate-1.jpg",
-    roomTypes: [
-      { type: "غرفة لشخصين", price: 50 },
-      { type: "غرفة لثلاثة أشخاص", price: 70 }
-    ],
-    features: ["واي فاي", "تكييف", "موقف سيارات"]
-  },
-  {
-    id: 2,
-    name: "فيلا مع إطلالة على البحر",
-    location: "صلالة",
-    image: "https://example.com/dummy-real-estate-2.jpg",
-    roomTypes: [
-      { type: "غرفة لشخص واحد", price: 40 },
-      { type: "غرفة لشخصين", price: 60 }
-    ],
-    features: ["مسبح", "حديقة", "مطبخ"]
-  }
-];
-
 const RealEstate = () => {
   const [realEstateListings, setRealEstateListings] = useState([]);
 
   useEffect(() => {
     const fetchListings = async () => {
       const storedListings = await getFromLocalStorage('realEstateListings') || [];
-      if (storedListings.length === 0) {
-        setRealEstateListings(dummyRealEstateListings);
-      } else {
-        setRealEstateListings(storedListings);
-      }
+      setRealEstateListings(storedListings);
     };
     fetchListings();
   }, []);
